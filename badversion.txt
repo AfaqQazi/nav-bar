@@ -1,0 +1,39 @@
+bad version
+
+Array.from(dropDownArrows).forEach(function(arrow) {
+	arrow.addEventListener('click' , () => {
+
+		let dropMenu = () => {
+		   let unorderedList = arrow.parentElement.nextElementSibling;
+		   let lis = unorderedList.querySelectorAll('li');
+		   // set height of li to li length.
+		   if (lis.length == 3) {unorderedList.style.height = "97.5px"} 
+		   else if (lis.length == 2) {unorderedList.style.height = "65px" }
+		   else if(lis.length == 1) {unorderedList.style.height = '32.5px'}
+		   else {unorderedList.style.height = '130px'}
+		   unorderedList.style.visibility = "visible";
+		   unorderedList.style.opacity = "1";
+		}
+
+		   let closeMenu = (arrowmenu) => {
+		   		Array.from(subMenus).forEach((submenu) => {
+		   			if (submenu.style.height > '0px') {
+		   				submenu.style.height = '0px';
+		   				submenu.style.visibility  = 'hidden';
+		   				submenu.style.opacity = '0';
+		   			} else {
+		   				dropMenu();
+		   				if (arrowmenu) {arrowmenu.classList.add('submenus')}		
+		   			}
+		   		})
+		   }
+
+		if (arrow.classList == 'dropdownarrows a') {
+			let firstSubMenu = arrow.parentElement.parentElement.parentElement;
+			firstSubMenu.classList.remove('submenus');
+			closeMenu(firstSubMenu);
+		} else {
+			closeMenu();
+		}
+	})
+});
